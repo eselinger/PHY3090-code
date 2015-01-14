@@ -1,3 +1,3 @@
-# PHY3090-code
+# PHY3090 Materials Science
 
-Code written for the PHY3090 Materials Science course at UOIT.
+Work done for the PHY3090 Materials Science course at UOIT
