@@ -17,11 +17,20 @@ def main():
         a2 = [0,a,0]
         a3 = [0,0,a]
 
+        lattice.append(basis)
+
 #oing to do for loops in each direction using basis atoms
-    for i in range(numcells):
-        for j in range(numcells):
-            for k in range(numcells):
-                lattice.append = 
+    for i in range(numcells): #place atoms in z
+        atom = basis + a3
+        basis = np.array(atom)
+        lattice.append(atom)
+
+    for j in range(numcells):
+
+                #repeat all atoms in y direction
+    for k in range(numcells): #repeat all atoms in x
+
+        lattice.append(atom)
 
     output = open('bravais_lattice.xyz', 'w')
     output.write(str(numat) + '\n \n')
