@@ -10,50 +10,42 @@ def main():
     n3 = int(sys.argv[4])+1
 
     a = 1.
+    b = a
+    c = a
 
     if bl=='sc':
-        b = a
-        c = a
         basis = np.array([[0.,0.,0.]])
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., a, 0.])
         a3 = np.array([0., 0., a])
 
     if bl=='bcc':
-        b = a
-        c = a
         basis = np.array([[0., 0., 0.],[a*0.5, a*0.5, a*0.5]])
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., a, 0.])
         a3 = np.array([0., 0., a])
 
     if bl=='fcc':
-        b = a
-        c = a
         basis = np.array([[0., 0., 0.],[a*0.5, a*0.5, 0.],[a*0.5, 0., a*0.5],[0., a*0.5, a*0.5]])
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., a, 0.])
         a3 = np.array([0., 0., a])     
 
     if bl=='st':
-        b = a
-        c = 2*a
+        if c==a: print "Result is a simple cubic. Must specify c for a simple tetragonal."
         basis = np.array([[0., 0., 0.]])
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., a, 0.])
         a3 = np.array([0., 0., c])
 
     if bl=='bct':
-        b = a
-        c = 3*a
+        if c==a: print "Result is a body-centered cubic. Must specificy c for body-centered tetragonal."
         basis = np.array([[0., 0., 0.],[a*0.5, a*0.5, c*0.5]])
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., a, 0.])
         a3 = np.array([0., 0., c])
 
     if bl=='so':
-        b = 2*a
-        c = 3*a
         basis = np.array([[0.,0.,0.]])
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., b, 0.])
@@ -82,6 +74,23 @@ def main():
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., b, 0.])
         a3 = np.array([0., 0., c])
+
+    if bl=='r':
+        b = a
+        c = a
+        basis = np.array([[0.,0.,0.]])
+        a1 = np.array([a, 0., 0.])
+        a2 = np.array([0., a, 0.])
+        a3 = np.array([0., 0., a])
+
+    if bl=='h':
+        b = a
+        c = 3*a
+        basis = np.array([[0.,0.,0.],[a*0.5,b*0.5,0.]])
+        a1 = np.array([a, 0., 0.])
+        a2 = np.array([0., b, 0.])
+        a3 = np.array([0., 0., c])
+
 
 
     lattice = []
