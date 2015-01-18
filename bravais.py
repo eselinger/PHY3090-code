@@ -10,8 +10,12 @@ def main():
     n3 = int(sys.argv[4])+1
 
     a = 1.
-    b = a
-    c = a
+    b = 2.
+    c = 3.
+
+    A = np.deg2rad(90) #alpha
+    B = np.deg2rad(80) #beta
+    Y = np.deg2rad(90) #gamma
 
     if bl=='sc':
         basis = np.array([[0.,0.,0.]])
@@ -32,14 +36,14 @@ def main():
         a3 = np.array([0., 0., a])     
 
     if bl=='st':
-        if c==a: print "Result is a simple cubic. Must specify c for a simple tetragonal."
+#        if c==a: print "ERROR: Result is a simple cubic. Must specify c for a simple tetragonal."
         basis = np.array([[0., 0., 0.]])
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., a, 0.])
         a3 = np.array([0., 0., c])
 
     if bl=='bct':
-        if c==a: print "Result is a body-centered cubic. Must specificy c for body-centered tetragonal."
+#        if c==a: print "ERROR: Result is a body-centered cubic. Must specificy c for body-centered tetragonal."
         basis = np.array([[0., 0., 0.],[a*0.5, a*0.5, c*0.5]])
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., a, 0.])
@@ -52,45 +56,35 @@ def main():
         a3 = np.array([0., 0., c])
 
     if bl=='bco':
-        b = 2*a
-        c = 3*a
         basis = np.array([[0., 0., 0.],[a*0.5, b*0.5, c*0.5]])
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., b, 0.])
         a3 = np.array([0., 0., c])
 
     if bl=='eco':
-        b = 2*a
-        c = 3*a
         basis = np.array([[0., 0., 0.],[a*0.5, b*0.5, 0.]])
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., b, 0.])
         a3 = np.array([0., 0., c])
 
     if bl=='fco':
-        b = 2*a
-        c = 3*a
         basis = np.array([[0., 0., 0.],[a*0.5, b*0.5, 0.],[a*0.5, 0., c*0.5],[0., b*0.5, c*0.5]])
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., b, 0.])
         a3 = np.array([0., 0., c])
 
-    if bl=='r':
-        b = a
-        c = a
+    if bl=='sm':
         basis = np.array([[0.,0.,0.]])
         a1 = np.array([a, 0., 0.])
-        a2 = np.array([0., a, 0.])
-        a3 = np.array([0., 0., a])
+        a2 = np.array([0., b, 0.])
+        if B > np.pi:
+            a3 = np.array([0., -np.absolute(np.tan((np.pi/2)-B)), c])
 
-    if bl=='h':
-        b = a
-        c = 3*a
-        basis = np.array([[0.,0.,0.],[a*0.5,b*0.5,0.]])
+    if bl=='ecm':
+        basis = np.array([[0.,0.,0.],[a*0.5, b*0.5, 0.]])
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., b, 0.])
-        a3 = np.array([0., 0., c])
-
+        a3 = np.array([0., -np.absolute(np.tan((np.pi/2)-B)), c])
 
 
     lattice = []
@@ -101,9 +95,9 @@ def main():
                 for x in range(n1):
                     R = x*a1 + y*a2 + z*a3 + basis[i]
 
-                    if R[0] <= (n1-1)*a:
-                        if R[1] <= (n2-1)*b:
-                            if R[2] <= (n3-1)*c:
+                    if R[0] <= (n1-1.)*a:
+                        if R[1] <= (n2-1.)*b:
+                            if R[2] <= (n3-1.)*c:
                                 lattice.append(R)
 
     output = open(str(sys.argv[1]) + '.xyz', 'w')
