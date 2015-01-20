@@ -58,7 +58,7 @@ def main():
             r = r[np.nonzero(r)]
             V = eps*((r_m/r)**12 - 2*(r_m/r)**6)
             ETOT += np.sum(V)
-        E = ETOT/(numat)
-        print E
+        E = ETOT/(numat*2.)
+        print E, numat
 
 main()
