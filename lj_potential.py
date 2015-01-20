@@ -8,12 +8,12 @@ from  scipy.spatial.distance import cdist
 def main():
     bl = sys.argv[1]
 
-    for i in range(2,1000):
-        n1 = i
+    for i in range(1,1000):
+        n1 = i+1
         n2 = n1
         n3 = n1
 
-        a = 1.
+        a = 2.
 
         if bl=='sc':
             basis = np.array([[0.,0.,0.]])
@@ -49,15 +49,16 @@ def main():
 
         numat = len(lattice)
 
-        r_m=2
-        eps=10
-        ETOT = 0
+        r_m=2.
+        eps=10.
+        ETOT = 0.
 
         for k in range(numat):
             r = cdist(lattice,np.array([lattice[k]])).flatten()
             r = r[np.nonzero(r)]
-            V = eps*((r_m/r)**12 - 2*(r_m/r)**6)
+            V = eps*((r_m/r)**12 - (2.*(r_m/r)**6))
             ETOT += np.sum(V)
+        
         E = ETOT/(numat*2.)
         print E, numat
 
