@@ -1,3 +1,0 @@
-If this were a real material I would expect the structure to be simple cubic, because this gave the lowest energy per atom (corresponding to a more accurate equilibrium lattice constant).
-
-If the pressure was non-zero we would need the system to be extended in all directions infinitely (i.e. periodic boundary conditions) because with a pressure applied there would be edge effects which would make for an inaccurate energy per atom calculation.
