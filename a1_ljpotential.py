@@ -13,21 +13,23 @@ def main():
         n2 = n1
         n3 = n1
 
-        a = 2.
-
+ 
         if bl=='sc':
+            a = 2.
             basis = np.array([[0.,0.,0.]])
             a1 = np.array([a, 0., 0.])
             a2 = np.array([0., a, 0.])
             a3 = np.array([0., 0., a])
 
         if bl=='bcc':
+            a = 2.
             basis = np.array([[0., 0., 0.],[a*0.5, a*0.5, a*0.5]])
             a1 = np.array([a, 0., 0.])
             a2 = np.array([0., a, 0.])
             a3 = np.array([0., 0., a])
 
         if bl=='fcc':
+            a = np.sqrt(8.)
             basis = np.array([[0., 0., 0.],[a*0.5, a*0.5, 0.],[a*0.5, 0., a*0.5],[0., a*0.5, a*0.5]])
             a1 = np.array([a, 0., 0.])
             a2 = np.array([0., a, 0.])
