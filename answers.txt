@@ -1,0 +1,3 @@
+If this were a real material I would expect the structure to be simple cubic, because this gave the lowest energy per atom (corresponding to a more accurate equilibrium lattice constant).
+
+If the pressure was non-zero
