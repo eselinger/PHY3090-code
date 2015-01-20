@@ -9,9 +9,12 @@ def main():
     n2 = int(sys.argv[3])+1
     n3 = int(sys.argv[4])+1
 
+#sc, bcc, fcc: b = a
+#st, bct: b = a, must specify c
+#else: must specify b,c
     a = 1.
-    b = 2.
-    c = 3.
+    b = a
+    c = a
 
     A = np.deg2rad(90) #alpha
     B = np.deg2rad(80) #beta
@@ -77,8 +80,7 @@ def main():
         basis = np.array([[0.,0.,0.]])
         a1 = np.array([a, 0., 0.])
         a2 = np.array([0., b, 0.])
-        if B > np.pi:
-            a3 = np.array([0., -np.absolute(np.tan((np.pi/2)-B)), c])
+        a3 = np.array([0., -np.absolute(np.tan((np.pi/2)-B)), c])
 
     if bl=='ecm':
         basis = np.array([[0.,0.,0.],[a*0.5, b*0.5, 0.]])
@@ -109,4 +111,5 @@ def main():
 
     output.close()
 
-main()
+if __name__ == '__main__':
+    main()
