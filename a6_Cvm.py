@@ -13,8 +13,8 @@ f = lambda x: ((x**4)*np.exp(x))/(np.exp(x) - 1.)**2
 
 for T in range(500):
     T = T+1
-    y = Td/T
-    z = Te/T
+    y = T/Td
+    z = Te/T 
     x = integrate.quad(f,0,y)
     x = float(x[0])
 
