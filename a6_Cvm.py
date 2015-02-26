@@ -15,9 +15,9 @@ for T in range(500):
     T = T+1
     y = T/Td
     z = Te/T 
-    x = integrate.quad(f,0,y)
+    x = integrate.quad(f,0,Td/T)
     x = float(x[0])
 
     C_D = 9.*N*con.k*(y**3)*x
     C_E = 3*N*con.k*(z**2)*(np.exp(z)/((np.exp(z) - 1)**2))
-    print T,C_D,C_E
+    print T,C_D*con.N_A/2,C_E*con.N_A/2
