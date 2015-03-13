@@ -13,6 +13,24 @@ dt = 0.001
 #initial conditions
 #
 
+def lattice(n): #n spacing of atoms
+    basis = np.array([[0.,0.]])
+    a1 = np.array([n, 0.])
+    a2 = np.array([0., n])
+
+    lattice = []
+
+    for i in range(len(basis)):
+        for y in range(10):
+            for x in range(10):
+                R = x*a1 + y*a2 + basis[i]
+
+                if R[0] <= (10-1.):
+                    if R[1] <= (10-1.):
+                        lattice.append(R)
+
+    return lattice
+
 def dist(a,b):
     """
     Returns the distance between two vectors, a and b
@@ -40,12 +58,12 @@ def move_f(atoms):
     # note that this assumes the spring is the x direction. No projections are being done!
 
     for i in range(natoms):
-        forces[i][0]  = -f(atoms[i],  atoms[(i+1)%natoms])   # atom to the right
-        forces[i][0] += +f(atoms[i-1],atoms[i])              # atom to the left
+        forces[i][0]  = -F(atoms[i],  atoms[(i+1)%natoms])   # atom to the right
+        forces[i][0] += +F(atoms[i-1],atoms[i])              # atom to the left
 
     # Deal with the special case of the atoms at either end of the chain
-    forces[0][0] =  -f(atoms[0], atoms[1])
-    forces[-1][0] = +f(atoms[-2], atoms[-1])
+    forces[0][0] =  -F(atoms[0], atoms[1])
+    forces[-1][0] = +F(atoms[-2], atoms[-1])
 
     return forces
 
@@ -81,25 +99,15 @@ def create_arrays(natoms):
  
 
 def main():
-    try:
-        prog = sys.argv[0]
-    #    a = float(sys.argv[1])
-    except IndexError:
-        # print '\nusage: '+prog+' a (where a is a number)\n'
-        sys.exit(0)
-
     natoms = 10
     atom_x, atom_v, atom_a = create_arrays(natoms)
-    spacing = 2.1
-
-    for i in range(natoms): # atoms are 2.1 unit apart to start, along the x-axis
-        atom_x[i][0] = i*spacing 
-   
+  
+    atom_x = lattice(1.)
 
     # dynamics
     print '# Note, forces are only updated in x right now'
 
-    for i in range(maxRun):
+    for i in range(steps):
 
         atom_f = move_f(atom_x)  
         atom_a = move_a(atom_a, atom_f, m)
