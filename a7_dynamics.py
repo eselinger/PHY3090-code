@@ -55,17 +55,20 @@ def move_f(atoms):
     natoms = len(atoms)
 
     # Use neighbours on either side to set force. Ends will be wrong (see fix below)
-    # note that this assumes the spring is the x direction. No projections are being done!
 
     for i in range(natoms):
         forces[i][0]  = -F(atoms[i],  atoms[(i+1)%natoms])   # atom to the right
         forces[i][0] += +F(atoms[i-1],atoms[i])              # atom to the left
         forces[i][1] = -F(atoms[i], atoms[(i+n)%natoms])     # atom down
-        forces[i][1] += +F(atomes[i-n],atoms[i])            # atom up
+        forces[i][1] += +F(atoms[i-n], atoms[i])            # atom up
 
-    # Deal with the special case of the atoms at either end of the chain
+    # Deal with the special case of the atoms at right side of lattice, ends of lattice
     for i in range(n):
-        forces[-n-1] = atoms[-n-1]
+        forces[i*n][0] = -F(atoms[i*n], atoms[i*n + 1])         #atoms at (0, y)
+        forces[i*n - 1][0] = +F(atoms[i*n - 2], atoms[i*n - 1]) #atoms at (9, y)
+        forces[i][1] = -F(atoms[i], atoms[(i+n)])               #atoms at (x, 0)
+        forces[-n-i][1] = +F(atoms[-n-i], atoms[i])             #atoms at (x, 9)
+        forces[-n-i] = 0.         #atoms furthest right are fixed
 
     return forces
 
