@@ -1,11 +1,9 @@
 #/usr/bin/python
 
 #system parameters
-k1 = 20.
-k2 = 20.
-m1 = 3.0
-m2 = 3.0
-x01 = 4.
+k = 20.
+m = 3.
+r0 = 2.
 dt = 0.001
 
 #initial conditions
@@ -19,7 +17,7 @@ t = 0.
 
 for i in range(10000):
     x02 = x1 + 2
-    f1 = -(k1+k2)*(x1 - x01) + k2*(x2 - x1 - x01)
+    f = -k*(
     f2 = -k2*((x2 - x02))
 
     a1 = f1/m1
