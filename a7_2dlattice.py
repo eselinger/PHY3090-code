@@ -26,7 +26,7 @@ def main():
 
     for j in range(len(lattice)):
         a = lattice[j]
-        output.write('X ' + ' ' + str(a[0]) + ' ' + str(a[1]) + ' ' + '0.000' + '\n')
+        output.write('X ' + ' ' + str(a[0]) + ' ' + str(a[1]) + '\n')
 
     output.close()
 

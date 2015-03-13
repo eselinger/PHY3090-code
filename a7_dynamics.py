@@ -13,16 +13,16 @@ dt = 0.001
 #initial conditions
 #
 
-def lattice(n): #n spacing of atoms
+def lattice(n): #n number of columns/rows
     basis = np.array([[0.,0.]])
-    a1 = np.array([n, 0.])
-    a2 = np.array([0., n])
+    a1 = np.array([1, 0.])
+    a2 = np.array([0., 1])
 
     lattice = []
 
     for i in range(len(basis)):
-        for y in range(10):
-            for x in range(10):
+        for y in range(n):
+            for x in range(n):
                 R = x*a1 + y*a2 + basis[i]
 
                 if R[0] <= (10-1.):
@@ -60,10 +60,12 @@ def move_f(atoms):
     for i in range(natoms):
         forces[i][0]  = -F(atoms[i],  atoms[(i+1)%natoms])   # atom to the right
         forces[i][0] += +F(atoms[i-1],atoms[i])              # atom to the left
+        forces[i][1] = -F(atoms[i], atoms[(i+n)%natoms])     # atom down
+        forces[i][1] += +F(atomes[i-n],atoms[i])            # atom up
 
     # Deal with the special case of the atoms at either end of the chain
-    forces[0][0] =  -F(atoms[0], atoms[1])
-    forces[-1][0] = +F(atoms[-2], atoms[-1])
+    for i in range(n):
+        forces[-n-1] = atoms[-n-1]
 
     return forces
 
@@ -102,7 +104,7 @@ def main():
     natoms = 10
     atom_x, atom_v, atom_a = create_arrays(natoms)
   
-    atom_x = lattice(1.)
+    atom_x = lattice(10.)
 
     # dynamics
     print '# Note, forces are only updated in x right now'
